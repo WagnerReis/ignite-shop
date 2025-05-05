@@ -1,5 +1,4 @@
 import { styled } from "@/styles";
-import { globalStyles } from '@/styles/global'
 
 const Button = styled('button', {
   backgroundColor: '$green500',
@@ -16,14 +15,11 @@ const Button = styled('button', {
   }
 });
 
-globalStyles()
-
 export default function Home() {
-
   return (
     <Button>
       <span>test</span>
       Enviar
     </Button>
-  );
+  )
 }
