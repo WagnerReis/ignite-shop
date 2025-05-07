@@ -1,61 +1,28 @@
-"use client"
+import { stripe } from "@/lib/stripe";
+import { HomeClient } from "@/components/homeClient";
+import Stripe from "stripe";
 
-import Image from "next/image";
-import { useKeenSlider } from 'keen-slider/react'
-
-import { HomeContainer, Product } from "./home";
-
-import shirtOne from '@/assets/camisetas/1.png'
-import shirtTwo from '@/assets/camisetas/2.png'
-import shirtThree from '@/assets/camisetas/3.png'
-
-import 'keen-slider/keen-slider.min.css'
-
-export default function Home() {
-  const [sliderRef] = useKeenSlider({
-    slides: {
-      perView: 3,
-      spacing: 48,
-    }
+export default async function Home() {
+  const { data } = await stripe.products.list({
+    expand: ['data.default_price']
   })
 
+  const products = data.map(product => {
+    const price = product.default_price as { unit_amount: number };
+
+    console.log(price.unit_amount)
+
+    return {
+      id: product.id,
+      name: product.name,
+      imageUrl: product.images[0],
+      price: new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      }).format((price.unit_amount || 0) / 100),
+    }
+  });
   return (
-    <HomeContainer ref={sliderRef} className="keen-slider">
-      <Product className="keen-slider__slide">
-        <Image src={shirtOne} width={520} height={480} alt="" />
-
-        <footer>
-          <strong>Camiseta X</strong>
-          <span>R$ 79,90</span>
-        </footer>
-      </Product>
-
-      <Product className="keen-slider__slide">
-        <Image src={shirtTwo} width={520} height={480} alt="" />
-
-        <footer>
-          <strong>Camiseta Y</strong>
-          <span>R$ 79,90</span>
-        </footer>
-      </Product>
-
-      <Product className="keen-slider__slide">
-        <Image src={shirtThree} width={520} height={480} alt="" />
-
-        <footer>
-          <strong>Camiseta Y</strong>
-          <span>R$ 79,90</span>
-        </footer>
-      </Product>
-
-      <Product className="keen-slider__slide">
-        <Image src={shirtThree} width={520} height={480} alt="" />
-
-        <footer>
-          <strong>Camiseta Y</strong>
-          <span>R$ 79,90</span>
-        </footer>
-      </Product>
-    </HomeContainer>
+    <HomeClient products={products} />
   )
 }

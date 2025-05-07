@@ -4,7 +4,7 @@ import { getCssText, styled } from "@/styles";
 
 
 import { globalStyles } from '@/styles/global'
-import { Header } from "@/components/Header";
+import { Header } from "@/components/header";
 
 globalStyles()
 
