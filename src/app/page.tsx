@@ -1,11 +1,16 @@
 import { stripe } from "@/lib/stripe";
 import { HomeClient } from "@/components/homeClient";
-import Stripe from "stripe";
 
-export default async function Home() {
-  const { data } = await stripe.products.list({
+async function getProducts() {
+  const response = await stripe.products.list({
     expand: ['data.default_price']
   })
+
+  return { data: response.data }
+}
+
+export default async function Home() {
+  const { data } = await getProducts()
 
   const products = data.map(product => {
     const price = product.default_price as { unit_amount: number };
@@ -22,7 +27,10 @@ export default async function Home() {
       }).format((price.unit_amount || 0) / 100),
     }
   });
+
   return (
     <HomeClient products={products} />
   )
 }
+
+export const revalidate = 60 * 10;
