@@ -15,8 +15,6 @@ export default async function Home() {
   const products = data.map(product => {
     const price = product.default_price as { unit_amount: number };
 
-    console.log(price.unit_amount)
-
     return {
       id: product.id,
       name: product.name,
