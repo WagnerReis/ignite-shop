@@ -1,24 +1,24 @@
-'use client'
+"use client";
 
-import { useKeenSlider } from 'keen-slider/react'
+import { useKeenSlider } from "keen-slider/react";
 import Image from "next/image";
 import { HomeContainer, Product } from "@/app/home";
-import 'keen-slider/keen-slider.min.css'
-import { globalCss } from '@/styles';
-import { useEffect } from 'react';
-import Link from 'next/link';
+import "keen-slider/keen-slider.min.css";
+import { globalCss } from "@/styles";
+import { useEffect } from "react";
+import Link from "next/link";
 
 // Adicione estilos globais para o slider não inicializado
 const sliderStyles = globalCss({
-  '.keen-slider:not(.keen-slider-initialized)': {
-    display: 'flex',
-    gap: '48px',
+  ".keen-slider:not(.keen-slider-initialized)": {
+    display: "flex",
+    gap: "48px",
 
-    '& > div': {
-      minWidth: 'calc((100% - 96px) / 3)',
-      maxWidth: 'calc((100% - 96px) / 3)',
-    }
-  }
+    "& > div": {
+      minWidth: "calc((100% - 96px) / 3)",
+      maxWidth: "calc((100% - 96px) / 3)",
+    },
+  },
 });
 
 interface Product {
@@ -39,23 +39,19 @@ export function HomeClient({ products }: HomeClientProps) {
     slides: {
       perView: 3,
       spacing: 48,
-    }
-  })
+    },
+  });
 
   useEffect(() => {
     if (instanceRef.current) {
-      instanceRef.current.container.classList.add('keen-slider-initialized');
+      instanceRef.current.container.classList.add("keen-slider-initialized");
     }
   }, [instanceRef]);
 
   return (
     <HomeContainer ref={sliderRef} className="keen-slider">
-      {products.map(product => (
-        <Link
-          key={product.id}
-          href={`/product/${product.id}`}
-          prefetch={false}
-        >
+      {products.map((product) => (
+        <Link key={product.id} href={`/product/${product.id}`} prefetch={false}>
           <Product className="keen-slider__slide">
             <Image src={product.imageUrl} width={520} height={480} alt="" />
             <footer>
@@ -66,5 +62,5 @@ export function HomeClient({ products }: HomeClientProps) {
         </Link>
       ))}
     </HomeContainer>
-  )
+  );
 }

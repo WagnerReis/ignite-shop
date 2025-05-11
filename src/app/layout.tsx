@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-import { getCssText, styled } from "@/styles";
+import { getCssText } from "@/styles";
 
-
-import { globalStyles } from '@/styles/global'
+import { globalStyles } from "@/styles/global";
 import { Header } from "@/components/header";
 import { StitchesRegistry } from "@/lib/stitches-registry";
 import { Container } from "./component";
 
-globalStyles()
+globalStyles();
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -29,7 +28,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <style id="stitches" dangerouslySetInnerHTML={{ __html: getCssText() }} />
+        <style
+          id="stitches"
+          dangerouslySetInnerHTML={{ __html: getCssText() }}
+        />
       </head>
       <body className={`${roboto.variable}`}>
         <StitchesRegistry>
@@ -42,5 +44,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-

@@ -3,17 +3,17 @@ import { styled } from "@/styles";
 export const HomeContainer = styled("main", {
   display: "flex",
   width: "100%",
-  maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
-  marginLeft: 'auto',
+  maxWidth: "calc(100vw - ((100vw - 1180px) / 2))",
+  marginLeft: "auto",
   minHeight: 656,
-  overflow: "auto"
-})
+  overflow: "auto",
+});
 
 export const Product = styled("div", {
   background: "linear-gradient(180deg, #1EA483 0, #7465D4 100%)",
   borderRadius: 8,
-  cursor: 'pointer',
-  position: 'relative',
+  cursor: "pointer",
+  position: "relative",
   overflow: "hidden",
   minWidth: 540,
 
@@ -22,7 +22,9 @@ export const Product = styled("div", {
   justifyContent: "center",
 
   img: {
-    objectFit: 'cover'
+    objectFit: "cover",
+    width: "auto",
+    height: "auto",
   },
 
   footer: {
@@ -53,13 +55,13 @@ export const Product = styled("div", {
       fontSize: "xl",
       fontWeight: "bold",
       color: "$green300",
-    }
+    },
   },
 
   "&:hover": {
     footer: {
       transform: "translateY(0%)",
       opacity: 1,
-    }
-  }
-})
+    },
+  },
+});
