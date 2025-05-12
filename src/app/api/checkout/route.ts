@@ -1,8 +1,12 @@
 import { stripe } from '@/lib/stripe';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(req: NextRequest) {
-  const priceId = "price_1RM6C0RTzQQ8ehQa5QqibUtX";
+export async function POST(req: NextRequest) {
+  const { priceId } = await req.json();
+
+  if (!priceId) {
+    return NextResponse.json({ error: 'Price not found.' }, { status: 400 });
+  }
 
   const successUrl = `${process.env.NEXT_URL}/success`;
   const cancelUrl = `${process.env.NEXT_URL}/`;

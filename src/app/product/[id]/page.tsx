@@ -28,7 +28,7 @@ export default async function ProductPage(props: { params: Props }) {
 
         <p>{product.description}</p>
 
-        <BuyButton product={product} />
+        <BuyButton priceId={product.defaultPriceId} />
       </ProductDetails>
     </ProductContainer>
   );

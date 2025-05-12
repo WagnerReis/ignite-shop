@@ -1,4 +1,5 @@
 'use client';
+import { useState } from "react";
 import { Button } from "./styles";
 
 interface Product {
@@ -11,17 +12,38 @@ interface Product {
 }
 
 interface BuyButtonProps {
-  product: Product;
+  priceId: string;
 }
 
-function BuyButton({ product }: BuyButtonProps) {
-  function handleBuyProduct() {
-    console.log(product.defaultPriceId)
+function BuyButton({ priceId }: BuyButtonProps) {
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
+
+  async function handleBuyProduct() {
+    try {
+      setIsCreatingCheckoutSession(true);
+
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          priceId
+        })
+      })
+
+      const { checkoutUrl } = await response.json();
+
+      window.location.href = checkoutUrl;
+    } catch (err) {
+      setIsCreatingCheckoutSession(false);
+      alert("Falha ao redirecionar ao checkout")
+    }
   }
 
   return (
-    <Button onClick={handleBuyProduct}>
-      Comprar
+    <Button onClick={handleBuyProduct} disabled={isCreatingCheckoutSession}>
+      {isCreatingCheckoutSession ? "Aguarde..." : "Comprar"}
     </Button>
   );
 }
