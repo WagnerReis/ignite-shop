@@ -53,19 +53,18 @@ export function HomeClient({ products }: HomeClientProps) {
   return (
     <HomeContainer ref={sliderRef} className="keen-slider">
       {products.map((product) => (
-        <Link key={product.id} href={`/product/${product.id}`} prefetch={false}>
-          <Product className="keen-slider__slide">
-            <Image src={product.imageUrl} width={520} height={480} alt="" />
-            <footer>
-              <div>
-                <strong>{product.name}</strong>
-                <span>{product.price}</span>
-              </div>
-              <HangBagButton fill />
-            </footer>
-          </Product>
-        </Link>
-      ))}
-    </HomeContainer>
+        <Product key={product.id} className="keen-slider__slide">
+          <Image src={product.imageUrl} width={520} height={480} alt="" />
+          <footer>
+            <div>
+              <strong>{product.name}</strong>
+              <span>{product.price}</span>
+            </div>
+            <HangBagButton fill />
+          </footer>
+        </Product>
+      ))
+      }
+    </HomeContainer >
   );
 }
