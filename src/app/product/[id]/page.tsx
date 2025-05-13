@@ -2,8 +2,13 @@ import { ImageContainer, ProductContainer, ProductDetails } from "./styles";
 import Image from "next/image";
 import { getProduct } from "@/lib/products";
 import BuyButton from "@/components/buyProduct";
+import { Metadata } from "next";
 
 type Props = Promise<{ id: string }>;
+
+export const metadata: Metadata = {
+  title: 'Product | Ignite Shop',
+}
 
 export default async function ProductPage(props: { params: Props }) {
   const { id } = await props.params;

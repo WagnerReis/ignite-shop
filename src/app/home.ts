@@ -12,7 +12,6 @@ export const HomeContainer = styled("main", {
 export const Product = styled("div", {
   background: "linear-gradient(180deg, #1EA483 0, #7465D4 100%)",
   borderRadius: 8,
-  cursor: "pointer",
   position: "relative",
   overflow: "hidden",
   minWidth: 540,
@@ -40,7 +39,7 @@ export const Product = styled("div", {
     alignItems: "center",
     justifyContent: "space-between",
 
-    backgroundColor: "rgba(0, 0, 0.6)",
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
 
     transform: "translateY(110%)",
     opacity: 0,
@@ -64,4 +63,10 @@ export const Product = styled("div", {
       opacity: 1,
     },
   },
+
+
+  "div:first-child": {
+    display: "flex",
+    flexDirection: "column",
+  }
 });

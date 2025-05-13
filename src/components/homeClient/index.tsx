@@ -7,6 +7,8 @@ import "keen-slider/keen-slider.min.css";
 import { globalCss } from "@/styles";
 import { useEffect } from "react";
 import Link from "next/link";
+import { Handbag } from "phosphor-react";
+import { HangBagButton } from "../Hangbag";
 
 // Adicione estilos globais para o slider não inicializado
 const sliderStyles = globalCss({
@@ -55,8 +57,11 @@ export function HomeClient({ products }: HomeClientProps) {
           <Product className="keen-slider__slide">
             <Image src={product.imageUrl} width={520} height={480} alt="" />
             <footer>
-              <strong>{product.name}</strong>
-              <span>{product.price}</span>
+              <div>
+                <strong>{product.name}</strong>
+                <span>{product.price}</span>
+              </div>
+              <HangBagButton fill />
             </footer>
           </Product>
         </Link>

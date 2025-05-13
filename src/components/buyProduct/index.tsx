@@ -43,7 +43,7 @@ function BuyButton({ priceId }: BuyButtonProps) {
 
   return (
     <Button onClick={handleBuyProduct} disabled={isCreatingCheckoutSession}>
-      {isCreatingCheckoutSession ? "Aguarde..." : "Comprar"}
+      {isCreatingCheckoutSession ? "Aguarde..." : "Colocar na sacola"}
     </Button>
   );
 }

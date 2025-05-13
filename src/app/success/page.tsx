@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ImageContainer, SuccessContainer } from "./styles";
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect } from "next/navigation";
 import { stripe } from "@/lib/stripe";
 import Stripe from "stripe";
 import Image from "next/image";
