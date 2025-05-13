@@ -1,9 +1,11 @@
+"use client"
 import { createContext, ReactNode, useState } from "react";
 
 interface Product {
   id: string;
   name: string;
   price: number;
+  imageUrl: string;
 }
 
 interface CartContextType {
@@ -23,7 +25,7 @@ export function CartProvider({ children }: CartProviderProps) {
   const [cartItems, setCartItems] = useState<Product[]>([])
 
   function handleAddItem(newItem: Product) {
-    if (cartItems.filter(item => item.id === newItem.id)) {
+    if (cartItems.find(item => item.id === newItem.id)) {
       return;
     }
 
@@ -31,7 +33,7 @@ export function CartProvider({ children }: CartProviderProps) {
   }
 
   function handleRemoveItem(id: String) {
-    if (cartItems.filter(item => item.id === id)) {
+    if (!cartItems.find(item => item.id === id)) {
       return;
     }
 

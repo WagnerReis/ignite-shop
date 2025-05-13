@@ -6,6 +6,7 @@ import { globalStyles } from "@/styles/global";
 import { Header } from "@/components/header";
 import { StitchesRegistry } from "@/lib/stitches-registry";
 import { Container } from "./component";
+import { CartProvider } from "@/contexts/cartContext";
 
 globalStyles();
 
@@ -40,8 +41,10 @@ export default function RootLayout({
       <body className={`${roboto.variable}`}>
         <StitchesRegistry>
           <Container>
-            <Header />
-            {children}
+            <CartProvider>
+              <Header />
+              {children}
+            </CartProvider>
           </Container>
         </StitchesRegistry>
       </body>
