@@ -10,7 +10,9 @@ interface CartModalProps {
 }
 
 export function CartModal({ isOpen, onClose }: CartModalProps) {
-  const { cartItems } = useCartContext();
+  const { cartItems, getTotal } = useCartContext();
+
+  const total = getTotal()
 
   if (!isOpen) return null;
 
@@ -37,12 +39,12 @@ export function CartModal({ isOpen, onClose }: CartModalProps) {
             <Summary>
               <div>
                 <span>Quantidade</span>
-                <span>2 itens</span>
+                <span>{cartItems.length} {cartItems.length === 1 ? "item" : "itens"}</span>
               </div>
 
               <div>
                 <strong>Valor total</strong>
-                <strong>R$ 159,80</strong>
+                <strong>{total}</strong>
               </div>
             </Summary>
 

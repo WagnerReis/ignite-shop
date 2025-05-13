@@ -12,7 +12,7 @@ interface CartContextType {
   cartItems: Product[],
   handleAddItem: (item: Product) => void;
   handleRemoveItem: (id: string) => void;
-  getTotal: () => void;
+  getTotal: () => string;
 }
 
 interface CartProviderProps {
@@ -45,10 +45,17 @@ export function CartProvider({ children }: CartProviderProps) {
   }
 
   function getTotal() {
-    return cartItems.reduce((acc, curr) => {
+    const totalNumber = cartItems.reduce((acc, curr) => {
       acc += curr.price
       return acc
     }, 0)
+
+    const totalFormatted = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(totalNumber);
+
+    return totalFormatted;
   }
 
   return (
