@@ -87,6 +87,5 @@ export const CartItemsContainer = styled("div", {
   flexDirection: "column",
   gap: "1.5rem",
   maxHeight: "600px",
-  border: "2px solid red",
   overflow: "auto"
 })

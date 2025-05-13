@@ -2,6 +2,7 @@ import { X } from "phosphor-react";
 import { createPortal } from "react-dom";
 import { CartContent, CartItemsContainer, ModalContainer, Overlay, Summary } from "./styles";
 import { CartItem } from "../cartItem";
+import { useCartContext } from "@/hooks/use-cart-context";
 
 interface CartModalProps {
   isOpen: boolean;
@@ -9,14 +10,15 @@ interface CartModalProps {
 }
 
 export function CartModal({ isOpen, onClose }: CartModalProps) {
+  const { cartItems } = useCartContext();
+
   if (!isOpen) return null;
 
-  console.log("open", isOpen)
   return createPortal(
     <div>
-      {isOpen && <Overlay />}
+      {(isOpen && cartItems.length > 0) && <Overlay />}
 
-      {isOpen && (
+      {(isOpen && cartItems.length > 0) && (
         <ModalContainer>
           <X size={24} onClick={onClose} />
 
@@ -24,13 +26,11 @@ export function CartModal({ isOpen, onClose }: CartModalProps) {
             <h1>Sacola de compras</h1>
 
             <CartItemsContainer>
-              <CartItem />
-              <CartItem />
-              <CartItem />
-              <CartItem />
-              <CartItem />
-              <CartItem />
-              <CartItem />
+              {cartItems.map(item => {
+                return (
+                  <CartItem key={item.id} data={item} />
+                )
+              })}
             </CartItemsContainer>
 
             {/* Summary */}

@@ -13,10 +13,7 @@ export async function getProducts() {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
-      price: new Intl.NumberFormat("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-      }).format((price.unit_amount || 0) / 100),
+      price: (price.unit_amount || 0) / 100,
     };
   });
 
@@ -35,10 +32,7 @@ export async function getProduct(productId: string) {
     name: product.name,
     imageUrl: product.images[0],
     description: product.description,
-    price: new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    }).format((price.unit_amount || 0) / 100),
+    price: (price.unit_amount || 0) / 100,
     defaultPriceId: price.id
   };
 }

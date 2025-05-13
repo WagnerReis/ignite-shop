@@ -1,8 +1,8 @@
 import { ImageContainer, ProductContainer, ProductDetails } from "./styles";
 import Image from "next/image";
 import { getProduct } from "@/lib/products";
-import BuyButton from "@/components/buyProduct";
 import { Metadata } from "next";
+import { AddCartButton } from "@/components/addCartProduct";
 
 type Props = Promise<{ id: string }>;
 
@@ -33,7 +33,7 @@ export default async function ProductPage(props: { params: Props }) {
 
         <p>{product.description}</p>
 
-        <BuyButton priceId={product.defaultPriceId} />
+        <AddCartButton product={product} />
       </ProductDetails>
     </ProductContainer>
   );

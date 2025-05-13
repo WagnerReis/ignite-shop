@@ -1,14 +1,20 @@
 import { Handbag } from "phosphor-react";
 import { HangBagContainer } from "./styles";
+import { Product } from "../cartItem";
+import { useCartContext } from "@/hooks/use-cart-context";
 
 interface HangBagButtonProps {
-  fill: boolean;
+  product: Product;
 }
 
-export function HangBagButton({ fill }: HangBagButtonProps) {
+export function HangBagButton({ product }: HangBagButtonProps) {
+  const { handleAddItem } = useCartContext();
+
   return (
     <HangBagContainer>
-      <button>
+      <button onClick={() => handleAddItem({
+        ...product
+      })}>
         <Handbag size={32} color="white" />
       </button>
     </HangBagContainer>

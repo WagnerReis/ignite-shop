@@ -27,7 +27,7 @@ interface Product {
   id: string;
   name: string;
   imageUrl: string;
-  price: string;
+  price: number;
 }
 
 interface HomeClientProps {
@@ -54,13 +54,15 @@ export function HomeClient({ products }: HomeClientProps) {
     <HomeContainer ref={sliderRef} className="keen-slider">
       {products.map((product) => (
         <Product key={product.id} className="keen-slider__slide">
-          <Image src={product.imageUrl} width={520} height={480} alt="" />
+          <Link href={`/product/${product.id}`} prefetch={false}>
+            <Image src={product.imageUrl} width={520} height={480} alt="" />
+          </Link>
           <footer>
             <div>
               <strong>{product.name}</strong>
               <span>{product.price}</span>
             </div>
-            <HangBagButton fill />
+            <HangBagButton product={product} />
           </footer>
         </Product>
       ))
