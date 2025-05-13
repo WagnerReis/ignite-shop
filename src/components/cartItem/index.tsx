@@ -7,6 +7,7 @@ export interface Product {
   name: string;
   price: number;
   imageUrl: string;
+  defaultPriceId: string;
 }
 
 interface CartItemProps {

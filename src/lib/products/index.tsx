@@ -7,13 +7,14 @@ export async function getProducts() {
   });
 
   const products = response.data.map((product) => {
-    const price = product.default_price as { unit_amount: number };
+    const price = product.default_price as Stripe.Price;
 
     return {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
       price: (price.unit_amount || 0) / 100,
+      defaultPriceId: price.id
     };
   });
 

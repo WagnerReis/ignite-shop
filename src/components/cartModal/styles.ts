@@ -39,8 +39,6 @@ export const CartContent = styled("div", {
 
   display: "flex",
   flexDirection: "column",
-  // alignItems: "space-between",
-  // justifyContent: "space-between",
 
   button: {
     cursor: "pointer",

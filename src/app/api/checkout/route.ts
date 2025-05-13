@@ -2,9 +2,9 @@ import { stripe } from '@/lib/stripe';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
-  const { priceId } = await req.json();
+  const { priceIds } = await req.json();
 
-  if (!priceId) {
+  if (!priceIds.length) {
     return NextResponse.json({ error: 'Price not found.' }, { status: 400 });
   }
 
@@ -15,12 +15,12 @@ export async function POST(req: NextRequest) {
     success_url: successUrl,
     cancel_url: cancelUrl,
     mode: "payment",
-    line_items: [
-      {
+    line_items: priceIds.map((priceId: string) => {
+      return {
         price: priceId,
-        quantity: 1,
+        quantity: 1
       }
-    ]
+    })
   })
 
   return NextResponse.json({ checkoutUrl: checkoutSession.url });

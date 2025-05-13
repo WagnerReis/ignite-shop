@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ImageContainer, SuccessContainer } from "./styles";
+import { ImageContainer, ImageContent, SuccessContainer } from "./styles";
 import { redirect } from "next/navigation";
 import { stripe } from "@/lib/stripe";
 import Stripe from "stripe";
@@ -15,8 +15,6 @@ export default async function Success({
 }: SuccessPageProps) {
   const sessionId = (await searchParams).session_id;
 
-  console.log('sessionId: ', sessionId);
-
   if (!sessionId) {
     redirect('/');
   }
@@ -26,18 +24,31 @@ export default async function Success({
   })
 
   const customerName = session.customer_details?.name;
-  const product = session.line_items?.data[0].price?.product as Stripe.Product;
+  const products = session.line_items?.data.map((product) => {
+    const productData = product.price?.product as Stripe.Product;
+
+    return {
+      id: product.id,
+      imageUrl: productData.images[0]
+    }
+  });
 
   return (
     <SuccessContainer >
       <h1>Compra efetuada</h1>
 
       <ImageContainer>
-        <Image src={product.images[0]} width={120} height={110} alt="" />
+        {
+          products?.map(product => (
+            <ImageContent key={product.id}>
+              <Image src={product.imageUrl} width={120} height={110} alt="" />
+            </ImageContent>
+          ))
+        }
       </ImageContainer>
 
       <p>
-        Uhuul <strong>{customerName}</strong>, sua compra de <strong>{product.name}</strong> já está a caminho da sua casa.
+        Uhuul <strong>{customerName}</strong>, sua compra de {products?.length} camisetas já está a caminho da sua casa.
       </p>
 
       <Link href="/">

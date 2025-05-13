@@ -13,7 +13,7 @@ export function HangBagButton({ product }: HangBagButtonProps) {
   return (
     <HangBagContainer>
       <button onClick={() => handleAddItem({
-        ...product
+        ...product,
       })}>
         <Handbag size={32} color="white" />
       </button>

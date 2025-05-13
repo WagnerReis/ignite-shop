@@ -7,7 +7,6 @@ import "keen-slider/keen-slider.min.css";
 import { globalCss } from "@/styles";
 import { useEffect } from "react";
 import Link from "next/link";
-import { Handbag } from "phosphor-react";
 import { HangBagButton } from "../Hangbag";
 
 // Adicione estilos globais para o slider não inicializado
@@ -28,6 +27,7 @@ interface Product {
   name: string;
   imageUrl: string;
   price: number;
+  defaultPriceId: string;
 }
 
 interface HomeClientProps {
